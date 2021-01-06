@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Основы Vue 3</title>
+    <link rel="stylesheet" href="theme.css" />
+
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="container pt-5" v-cloak>
+      <div class="card center">
+        <div v-html="myHtml"></div>
+
+        <h2 v-text="title"></h2>
+        <h2 v-once>{{ title }}</h2>
+        <h2 v-pre>{{ title }}</h2>
+        <button class="btn" @click="title = 'Другой заголовок'">
+          Сменить заголовок
+        </button>
+      </div>
+
+      <!-- <div class="card center">
+        <ul class="list">
+          <li 
+            class="list-item" 
+            v-for="item in 5"
+          >{{ item }}</li>
+        </ul>
+      </div> -->
+
+      <!-- <div class="card center">
+        <ul class="list">
+          <li 
+            class="list-item" 
+            v-for="(value, key) in person"
+          >{{ key }}: {{ value }}</li>
+        </ul>
+      </div> -->
+
+      <div class="form-control" style="width: 50%">
+        <input 
+          autofocus
+          type="text" 
+          @keydown.tab.prevent="addItemHandler"
+          ref="myInput"
+        >
+      </div>
+      
+      <div class="card center">
+        <p>Записи удаляются <code>ПКМ</code></p>
+        <ul class="list" v-if="items.length">
+          <li
+            class="list-item"
+            v-for="(item, index) in items"
+            @click.right.prevent="items.splice(index, 1)"
+            :key="item" 
+          >
+            <strong>{{ item }}. </strong>&nbsp;
+            <input type="text" @click.right.stop>
+          </li>
+        </ul>
+
+        <!-- v-show add element to DOM unlike v-else -->
+        <div v-show="!items.length">Записей нет</div>
+      </div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
